@@ -82,4 +82,35 @@ public class UserRepository {
 
         return listUserEntities;
     }
+
+    public int insert(UserEntity userEntity) {
+
+        String query = """
+            INSERT INTO users
+            (full_name, first_name, last_name, email, pass, phone, role_id)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+            """;
+
+        try {
+            Connection connection = MysqlConfig.getConnection();
+
+            PreparedStatement statement =
+                    connection.prepareStatement(query);
+
+            statement.setString(1, userEntity.getFullName());
+            statement.setString(2, userEntity.getFirstName());
+            statement.setString(3, userEntity.getLastName());
+            statement.setString(4, userEntity.getEmail());
+            statement.setString(5, userEntity.getPassword());
+            statement.setString(6, userEntity.getPhone());
+            statement.setInt(7, userEntity.getRoleId());
+
+            return statement.executeUpdate();
+
+        } catch (Exception e) {
+            System.out.println("Lỗi insert: " + e.getMessage());
+        }
+
+        return 0;
+    }
 }

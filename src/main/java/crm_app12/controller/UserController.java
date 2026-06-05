@@ -47,9 +47,37 @@ public class UserController extends HttpServlet {
             String email = req.getParameter("email");
             String password = req.getParameter("password");
             String phone = req.getParameter("phone");
-            String idRole = req.getParameter("role");
+            String roleId = req.getParameter("role");
 
-            req.getRequestDispatcher("user-add.jsp").forward(req, resp);
+            String[] arr = fullName.trim().split("\\s+");
+
+            String lastName = arr[arr.length - 1];
+
+            StringBuilder firstName = new StringBuilder();
+
+            for (int i = 0; i < arr.length - 1; i++) {
+                firstName.append(arr[i]).append(" ");
+            }
+
+            UserEntity userEntity = new UserEntity();
+
+            userEntity.setFullName(fullName);
+            userEntity.setFirstName(firstName.toString().trim());
+            userEntity.setLastName(lastName);
+            userEntity.setEmail(email);
+            userEntity.setPassword(password);
+            userEntity.setPhone(phone);
+            userEntity.setRoleId(Integer.parseInt(roleId));
+
+            boolean success = userServices.addUser(userEntity);
+
+            if (success) {
+                resp.sendRedirect(req.getContextPath() + "/user");
+            } else {
+                req.setAttribute("message", "Add user failed");
+                req.getRequestDispatcher("user-add.jsp")
+                        .forward(req, resp);
+            }
         }
     }
 }

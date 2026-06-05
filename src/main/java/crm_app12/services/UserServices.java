@@ -26,4 +26,9 @@ public class UserServices {
         return roleRepository.findAll();
     }
 
+    public boolean addUser(UserEntity userEntity) {
+        int count = userRepository.insert(userEntity);
+
+        return count > 0;
+    }
 }

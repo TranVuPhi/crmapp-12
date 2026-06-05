@@ -182,7 +182,7 @@
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <button type="submit" class="btn btn-success">Add User</button>
-                                    <a href="user-table.html" class="btn btn-primary">Quay lại</a>
+                                    <a href="${pageContext.request.contextPath}/user" class="btn btn-primary">Quay lại</a>
                                 </div>
                             </div>
                         </form>

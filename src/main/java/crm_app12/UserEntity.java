@@ -7,6 +7,33 @@ public class UserEntity {
     private String lastName;
     private String roleName;
     private String email;
+    private String password;
+    private String phone;
+    private int roleId;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public int getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
 
     public String getFullName() {
         return fullName;
