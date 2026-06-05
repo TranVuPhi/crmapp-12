@@ -6,6 +6,7 @@ import crm_app12.services.LoginServices;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,6 +28,22 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        Cookie[] cookies = req.getCookies();
+        String email = "";
+        String password = "";
+
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("email")) {
+                email = cookie.getValue();
+            }
+            if (cookie.getName().equals("password")) {
+                password = cookie.getValue();
+            }
+        }
+
+        req.setAttribute("email", email);
+        req.setAttribute("password", password);
+
         req.getRequestDispatcher("login.jsp").forward(req, resp);
     }
 
@@ -34,8 +51,9 @@ public class LoginController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
+        String remember = req.getParameter("remember");
 
-        String message = loginServices.checkLogin(email, password);
+        String message = loginServices.checkLogin(email, password, remember, resp);
 
         System.out.println(message);
     }

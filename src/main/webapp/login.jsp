@@ -24,12 +24,15 @@
                 <form action="login" method="post">
                     <div class="form-group">
                         <label>Email</label>
-                        <input type="email" class="form-control" name="email">
+                        <input type="email" class="form-control" name="email" value="${email}">
                     </div>
                     <div class="form-group">
                         <label>Mật khẩu</label>
-                        <input type="password" class="form-control" name="password">
+                        <input type="password" class="form-control" name="password" value="${password}">
                     </div>
+                    <br>
+                    <input type="checkbox" name="remember"> Ghi nhớ tài khoản
+                    <br>
                     <button type="submit" class="btn btn-primary">Đăng nhập</button>
                 </form>
             </div>
